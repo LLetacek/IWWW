@@ -1,0 +1,66 @@
+body {
+  background-color: #323232;
+}
+
+.hlavni {
+  position: absolute;
+  margin: 30px auto 0px auto;
+  left: 0;
+  right: 0;
+  background-color: #EEEEEE;
+  padding: 0px 10px 10px 10px;
+  width: 700px;
+}
+
+.lista {
+  background-color: #006794;
+  color: white;
+  float: left;
+  padding: 10px;
+  margin: 0px 15px 0px 5px;
+  box-shadow: 3px 3px 14px -6px #000000;
+}
+
+.lista h2 {
+  text-align: center;
+}
+
+.zkusenosti {
+  float: left;
+  width: 380px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.info {
+  margin-top: 70px;
+}
+
+.lajnaInf {
+  color: white;
+}
+
+.lajnaZk {
+  color: #006794;
+}
+
+.certifikat {
+  margin-left: 50px;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: 24px;
+  margin: 15px auto 0px auto;
+}
+
+h2 {
+  font-size: 20px;
+  margin: 5px;
+}
