@@ -1,0 +1,135 @@
+nav {
+    display: flex;
+}
+
+body {
+    margin: 0;
+    background: #efefef;
+}
+
+#logo::before {
+    height: 60px;
+    width: 60px;
+    background-color: #efefef;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: "🛫";
+    margin: 0;
+}
+
+#menu {
+    background-color: #1e2543;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+#menu label, #menu input {
+    display: none;
+}
+
+a {
+    color: white;
+}
+
+#menu a {
+    font-size: 30px;
+    margin: auto 20px auto 20px;
+    text-decoration: none;
+}
+
+footer a {
+    font-size: 16px;
+}
+
+#hero {
+    text-align: center;
+    background-image: url("../img/stratocumulus.jpg");
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nadpis {
+    font-size: 100px;
+    margin: 0;
+    padding-top: 200px;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+}
+
+footer {
+    margin-top: 10px;
+    padding: 50px;
+    background-color: #1e2543;
+    color: white;
+}
+
+footer li {
+    padding: 2px;
+}
+
+#paticka {
+    display: flex;
+    justify-content: space-around;
+}
+
+#copyright {
+    font-size: 2em;
+    text-align: center;
+}
+
+.clanky {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 768px) {
+
+    #menu label {
+        position: absolute;
+        right: 20px;
+        display: inline-block;
+        color: white;
+        border-style: solid;
+        border-color: #262d53;
+        font-style: normal;
+        font-size: 2em;
+        padding: 10px;
+    }
+
+    nav a {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #menu input:checked ~ nav {
+        display: block;
+        margin-right: 100px;
+    }
+
+    .nadpis {
+        font-size: 4em;
+    }
+
+    #paticka {
+        flex-direction: column;
+    }
+
+    footer li {
+        padding: 10px;
+    }
+}
+

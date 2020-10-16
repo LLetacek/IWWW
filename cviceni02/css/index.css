@@ -1,0 +1,53 @@
+.infoBlok {
+    width: 300px;
+    text-align: center;
+}
+
+.infoBlok > ul {
+    padding: 10px;
+    text-align: left;
+    list-style-type:none;
+}
+
+.infoBlok > img {
+    height: 180px;
+    border-radius: 20%;
+}
+
+#informace {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.infoWrapper {
+    width: 1000px;
+    margin: auto;
+}
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 768px) {
+
+    .infoWrapper {
+        max-width: 100%;
+    }
+
+    .infoWrapper > h2 {
+        padding-left: 20%;
+    }
+
+    .infoBlok {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .infoBlok > ul {
+        padding-left: 20%;
+        margin-top: 5px;
+    }
+
+    .infoBlok > img {
+        width: 60%;
+    }
+}

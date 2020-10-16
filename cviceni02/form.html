@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pilotův deník</title>
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div id="menu">
+        <a href="index.html"><div id="logo"></div></a>
+
+            <label for="hamburger">&#9776;</label>
+            <input type="checkbox" id="hamburger"/>
+
+            <nav>
+                <a href="fotogalerie.html">Fotogalerie</a>
+                <a href="form.html">Kontakt</a>
+            </nav>
+    </div>
+
+    <div>
+        <section id="hero">
+            <h1 class="nadpis">Kontakt</h1>
+        </section>
+    </div>
+
+    <section class="formWrapper">
+        <form action="index.html">
+        <table>
+            <tr>
+                <th colspan="2"><label>FEEDBACK</label></th>
+            </tr>
+            <tr>
+                <td class="tdr"><label>Jméno:</label></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td class="tdr"><label>Email:</label></td>
+                <td><input type="email"></td>
+            </tr>
+            <tr>
+                <td class="tdr"><label>Typ zpravy:</label></td>
+                <td>
+                    <select>
+                        <option>Typ na cesty</option>
+                        <option>Nenávistná</option>
+                        <option>Pozitivní</option>
+                        <option>Jiné</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdr"><label>Text:</label></td>
+                <td><textarea></textarea></td>
+            </tr>
+            <tr>
+                <td class="tdr"><label>Očekávám odpověď do:</label></td>
+                <td><input id="datumOdpo" type="datetime-local"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center" ><input type="submit"></td>
+            </tr>
+        </table>
+        </form>
+    </section>
+
+    <footer>
+        <div id="paticka">
+            <div>
+                <span class="clanky">Nejčtenější články</span>
+                <ul>
+                    <li><a href="#">Výlet do Karlových Varů</a></li>
+                    <li><a href="#">Návštěva Moskvy</a></li>
+                    <li><a href="#">Výlet na Filipíny</a></li>
+                    <li><a href="#">Vánoční přelet</a></li>
+                    <li><a href="#">Listopadové plachtění</a></li>
+                </ul>
+            </div>
+            <div>
+                <span class="clanky">Nejnovější články</span>
+                <ul>
+                    <li><a href="#">Výlet do Brna</a></li>
+                    <li><a href="#">Návštěva Taiwanu</a></li>
+                    <li><a href="#">Výlet na Madagaskar</a></li>
+                    <li><a href="#">Velikonoční přelet</a></li>
+                    <li><a href="#">Nedělní plachtění</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="copyright">
+            <p>Copyright © 2020</p>
+        </div>
+    </footer>
+</body>
+</html>
