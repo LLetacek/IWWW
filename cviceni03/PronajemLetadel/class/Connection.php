@@ -1,4 +1,5 @@
 <?php
+//https://github.com/petrfilip/KIT-IWWW/blob/4-php-classes/classes/Connection.php
 
 define("DB_HOST", "localhost");
 define("DB_NAME", "iwww");
