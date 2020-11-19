@@ -476,3 +476,6 @@ composer.lock
 *.xml
 cviceni03/PronajemLetadel/.idea/.name
 *.xml
+*.iml
+cviceni04/Letacek_eshop/.idea/.name
+*.meta
