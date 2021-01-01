@@ -1,0 +1,30 @@
+#buttonWrapper {
+    margin: 1em auto 1em auto;
+    text-align: center
+}
+
+@media print {
+
+    .btn-form-table {
+        display:none !important;
+    }
+
+    #rezervace {
+        font-size: 0.5em;
+    }
+
+    table {
+        font-size: 1.5em;
+        margin: auto 0 auto 0 !important;
+        width: 100% !important;
+    }
+
+    nav, footer, #menu, #buttonWrapper {
+        display:none !important;
+    }
+
+    body {
+        margin: 1em !important;
+        min-height: auto !important;
+    }
+}

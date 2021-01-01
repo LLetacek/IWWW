@@ -1,0 +1,37 @@
+#obraz {
+    text-align: center;
+    margin: auto;
+    padding: 20px 0px 20px 0px;
+    width: 1000px;
+}
+
+#obraz img {
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+#obraz a {
+    color: white;
+    text-decoration: none;
+}
+
+.button {
+    margin: 30px auto auto auto;
+    background-color: #1e2543;
+    color: white;
+    border-radius: 15px;
+    width: 150px;
+    padding: 10px;
+}
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 768px) {
+    #obraz {
+        width: 100%;
+    }
+
+    #obraz img {
+        max-width: 100%;
+    }
+}

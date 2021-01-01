@@ -1,0 +1,249 @@
+nav {
+    display: flex;
+}
+
+nav > a {
+    margin: auto 30px auto 30px;
+}
+
+* {
+    font-family: "Times New Roman", serif;
+}
+
+body {
+    margin: 0;
+    background: #efefef;
+}
+
+#logo::before {
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: "🛫";
+    margin: 0;
+}
+
+#profil::before {
+    text-align: center;
+    height: 50px;
+    width: 50px;
+    background-color: #095670;
+    display: flex;
+    content: "👨‍✈️";
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+#menu {
+    background-color: #1e2543;
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+#menu label, #menu input {
+    display: none;
+}
+
+a {
+    color: white;
+}
+
+#menu a, .dropbtn {
+    font-size: 30px;
+    text-decoration: none;
+}
+
+footer a {
+    font-size: 16px;
+}
+
+#hero {
+    text-align: center;
+    background-image: url("../img/stratocumulus.jpg");
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.nadpis {
+    font-size: 100px;
+    margin: 0;
+    padding-top: 200px;
+    color: white;
+    text-shadow: 0 0 10px black;
+}
+
+footer {
+    margin-top: 10px;
+    padding: 50px;
+    background-color: #1e2543;
+    color: white;
+}
+
+footer li {
+    padding: 2px;
+}
+
+#paticka {
+    display: flex;
+    justify-content: space-around;
+}
+
+#copyright {
+    font-size: 2em;
+    text-align: center;
+}
+
+.clanky {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/*inspirace: https://codepen.io/raubaca/pen/VejpQP*/
+.select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0;
+    background: #34495e none;
+
+    font-size: large;
+
+    width: 15em;
+    height: 2em;
+    overflow: hidden;
+    border-radius: .25em;
+
+    color: #fff;
+    cursor: pointer;
+    text-align-last: center;
+    font-weight: bold;
+
+    margin-bottom: 1em;
+}
+
+/*----------------------------------------------------*/
+/*https://www.w3schools.com/howto/howto_css_dropup.asp*/
+
+.dropbtn {
+    background-color: inherit;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+    min-width: 150px;
+    height: 100%;
+    text-align: center;
+    border: none;
+}
+
+.dropup {
+    position: relative;
+    display: inline-block;
+}
+
+.dropup-content {
+    display: none;
+    position: absolute;
+    text-align: center;
+    background-color: #095670;
+    width: 100%;
+    z-index: 1;
+}
+
+.dropup-content > a {
+    display: block;
+    padding-bottom: 20px;
+}
+
+.dropup:hover .dropup-content {
+    display: block;
+}
+
+.dropup:hover .dropbtn {
+    text-decoration: underline;
+    background-color: #095670;
+}
+
+/*----------------------------------------------------*/
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 1100px) {
+
+    .dropbtn {
+        padding-bottom: 20px;
+        width: 100%;
+    }
+
+    .dropup {
+        margin: auto 30px auto 30px;
+        width: 100%;
+    }
+
+    .dropup-content {
+        margin-right: 0;
+        position: relative;
+        margin-bottom: 5px;
+    }
+
+    #menu label {
+        position: absolute;
+        right: 20px;
+        display: inline-block;
+        color: white;
+        border-style: solid;
+        border-color: #262d53;
+        font-style: normal;
+        font-size: 2em;
+        padding: 10px;
+    }
+
+    nav a {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 25px;
+    }
+
+    nav {
+        display: none;
+    }
+
+    #menu input:checked ~ nav {
+        display: block;
+        margin-right: 100px;
+        max-width: 150px;
+    }
+
+    #menu input:checked ~ a {
+        display: none;
+    }
+
+    .nadpis {
+        font-size: 4em;
+    }
+}
+
+@media screen and (max-width: 835px) {
+
+    #paticka {
+        flex-direction: column;
+    }
+
+    footer li {
+        padding: 10px;
+    }
+}
+
+

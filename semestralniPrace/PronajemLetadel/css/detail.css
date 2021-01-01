@@ -1,0 +1,45 @@
+
+.detail-img {
+    padding: 1em;
+
+}
+
+.detail-img > img {
+    height: 200px;
+    max-width: 100%;
+}
+
+.detail-info {
+    margin-left: 4em;
+}
+
+.detail-form {
+    min-width: 350px;
+}
+
+.detail-info > ul {
+    margin-top: 0;
+    list-style-type: none;
+}
+
+.detail-info > p {
+    margin-bottom: 0.5em;
+    margin-left: 1em;
+}
+
+.detail-opravy {
+    padding: 1em;
+}
+
+.detail-opravy > table{
+    display: flex;
+}
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 651px) {
+    .detail-info {
+        margin-left: 0;
+    }
+
+}

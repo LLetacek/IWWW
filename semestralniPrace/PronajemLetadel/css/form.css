@@ -1,0 +1,54 @@
+.formWrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+table {
+    margin: auto;
+    display: block;
+    overflow-x: auto;
+    border-spacing: 5px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    background: #fffbee;
+}
+
+tbody {
+    margin: auto;
+}
+
+td, th {
+    padding: 10px;
+}
+
+table textarea {
+    box-sizing: border-box;
+    resize: vertical;
+    width: 100%;
+}
+
+.tdr {
+    text-align: right;
+    width: 50%;
+}
+
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 1000px) {
+
+    .formWrapper {
+        display: block;
+        max-width: 100%;
+    }
+
+    table {
+        margin: 1em;
+    }
+
+    table textarea {
+        box-sizing: border-box;
+        resize: vertical;
+    }
+}

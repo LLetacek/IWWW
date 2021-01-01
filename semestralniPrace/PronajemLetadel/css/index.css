@@ -1,0 +1,133 @@
+.infoBlok {
+    max-width: 250px;
+    text-align: center;
+}
+
+.infoBlok > p {
+    padding: 10px;
+    margin: 0 5px 0 5px;
+    text-align: left;
+}
+
+.infoBlok > img {
+    height: 200px;
+    max-width: 100%;
+    border-radius: 20%;
+}
+
+
+/*https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/*/
+main {
+    flex: 1;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#informace {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.infoWrapper {
+    width: 900px;
+    margin: auto;
+}
+
+/*RESPONZIVITA*/
+
+@media screen and (max-width: 901px) {
+
+    .infoWrapper {
+        max-width: 100%;
+    }
+
+    .infoWrapper > h2 {
+        padding-left: 20%;
+    }
+
+    .infoBlok {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .infoBlok > img {
+        height: 200px;
+    }
+
+    .infoBlok > ul {
+        padding-left: 20%;
+        margin-top: 5px;
+    }
+}
+
+@media screen and (max-width: 751px) {
+
+    .infoBlok > hr {
+        display: none;
+    }
+
+    .infoBlok {
+        border-bottom: 2px solid black;
+    }
+}
+
+/* https://github.com/petrfilip/KIT-IWWW/tree/5-eshop */
+
+.catalog-item {
+    width: 200px;
+    background-color: beige;
+    height: 300px;
+    margin: 5px;
+}
+
+.catalog-img {
+    font-size: 100px;
+}
+
+.cart-button, .catalog-buy-button {
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid yellow;
+    background-color: yellowgreen;
+    text-align: center;
+}
+
+#catalog-items {
+    display: flex;
+}
+
+a.catalog-buy-button {
+    display: block;
+}
+
+.cart-item {
+    justify-content: space-between;
+    display: flex;
+    margin: 5px;
+    border: 1px solid yellowgreen;
+    padding: 5px;
+}
+
+.cart-quantity {
+    margin: 10px;
+}
+
+.cart-price {
+    margin: 10px;
+
+}
+
+.cart-control {
+    display: flex;
+}
+
+#cart-total-price {
+    font-weight: bold;
+}
+
+
