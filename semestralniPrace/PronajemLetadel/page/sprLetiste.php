@@ -1,6 +1,9 @@
 <?php
 if($_POST) {
-    if(isset($_POST["PŘIDEJ_LETIŠTĚ"])) {
+    if(isset($_POST["operace"])) {
+        header("Location: /index.php?page=sprLetiste&sprava=".$_POST["operace"]);
+    }
+    else if(isset($_POST["PŘIDEJ_LETIŠTĚ"])) {
         try {
             $conn = Connection::getPdoInstance();
 
@@ -29,74 +32,63 @@ if($_POST) {
         }
     }
     else {
-        $data = Airport::getAll();
-        foreach ($data as $value) {
-            if(isset($_POST["smaz".$value["id_letiste"]])) {
-                $validation = Airport::delete($value["id_letiste"]);
-                break;
-            }
+        if(!empty(array_keys($_POST,"Smazat"))) {
+            $id = explode('smaz',array_keys($_POST,"Smazat")[0])[1];
+            $validation = Airport::delete($id);
         }
     }
 }
 ?>
 
 <script>
-    function getOperace(value) {
-        if(value === "pridej") {
-            document.getElementById("letiste").innerHTML = '\
-                <?php
-                $dataTableNewAirport = new FormTable("PŘIDEJ LETIŠTĚ","Přidat");
-                $dataTableNewAirport->addColumn("icao", "ICAO", "text");
-                $dataTableNewAirport->addColumn("poloha", "Poloha", "text");
-                $dataTableNewAirport->render("/index.php?page=sprLetiste");
-                ?>';
-        } else if(value === "zobraz"){
-            document.getElementById("letiste").innerHTML = '\
-                <?php
-                $btn["Správa"]["smaz"] = "Smazat";
-                $dataTableShowAirport = new DataTable(Airport::getAll());
-                $dataTableShowAirport->addColumn("icao", "ICAO");
-                $dataTableShowAirport->addColumn("poloha", "Poloha");
-                $dataTableShowAirport->renderWithButtons("id_letiste","/index.php?page=sprLetiste",$btn);
-                ?>';
-        }
+    function getOperace() {
+        document.getElementById("hidden").click();
     }
 </script>
 
 <section class="formWrapper">
     <div style="text-align: center; margin-bottom: 5px;">
-        <form name="form" method="get">
-            <select onchange="getOperace(this.value)" class="select">
+        <form name="sprava" method="post">
+            <select name="operace" onchange="getOperace()" class="select">
                 <?php
-                $set = NULL;
                 echo '<option disabled ';
-                if(!isset($_POST["edit"]) && !isset($_POST["vloz"]))
+                if(!isset($_GET["sprava"]))
                     echo 'selected value';
                 echo '> -- VYBER OPERACI -- </option>
                     <option value="zobraz" ';
-                if(isset($_POST["edit"])) {
+                if(isset($_GET["sprava"]) && $_GET["sprava"] == "zobraz") {
                     echo 'selected';
-                    $set = "zobraz";
                 }
                 echo '>Zobrazit letiště</option>
                     <option value="pridej"';
-                if(isset($_POST["vloz"])) {
+                if(isset($_GET["sprava"]) && $_GET["sprava"] == "pridej") {
                     echo 'selected';
-                    $set = "pridej";
                 }
                 echo '>Přidat letiště</option>';
                 ?>
             </select>
+            <button type="submit" name="hidden" id="hidden" hidden="hidden">
         </form>
     </div>
 
     <div id="letiste">
+        <?php
+        if (isset($_GET["sprava"])) {
+            if ($_GET["sprava"] == "pridej") {
+                $dataTableNewAirport = new FormTable("PŘIDEJ LETIŠTĚ","Přidat");
+                $dataTableNewAirport->addColumn("icao", "ICAO", "text");
+                $dataTableNewAirport->addColumn("poloha", "Poloha", "text");
+                $dataTableNewAirport->render("/index.php?page=sprLetiste&sprava=pridej");
+            }
+            else {
+                $btn["Správa"]["smaz"] = "Smazat";
+                $dataTableShowAirport = new DataTable(Airport::getAll());
+                $dataTableShowAirport->addColumn("icao", "ICAO");
+                $dataTableShowAirport->addColumn("poloha", "Poloha");
+                $dataTableShowAirport->renderWithButtons("id_letiste","/index.php?page=sprLetiste&sprava=zobraz",$btn);
+            }
+        }
+        ?>
     </div>
 
 </section>
-
-
-<?php
-if($set != NULL)
-    echo '<script>window.getOperace("'.$set.'"); </script>';
-?>

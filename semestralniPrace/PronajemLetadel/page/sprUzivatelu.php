@@ -1,5 +1,5 @@
 <?php
-    $dataTable = User::getAll($_SESSION["uzivatel"]);
+    $data = User::getAll($_SESSION["uzivatel"]);
 
     $username = "username";
     $jmeno = "jmeno";
@@ -10,20 +10,20 @@
     $btn["Správa"]["updtUcet"] = "Oprav účet";
     $btn["Správa"]["zrusUcet"] = "Zrušit účet";
 
-    foreach ($dataTable as $row) {
-        if(isset($_POST["updtUcet".$row["id_uzivatel"]])) {
-            $validation = User::update($row["id_uzivatel"],
+    if($_POST) {
+        if(!empty(array_keys($_POST,"Oprav účet"))) {
+            $id = explode('updtUcet',array_keys($_POST,"Oprav účet")[0])[1];
+            $validation = User::update($id,
                                 "",
                                 "",
-                                $_POST[$jmeno.$row["id_uzivatel"]],
-                                $_POST[$prijmeni.$row["id_uzivatel"]],
-                                $_POST[$email.$row["id_uzivatel"]],
-                                $_POST[$telefon.$row["id_uzivatel"]]);
-            break;
+                                $_POST[$jmeno.$id],
+                                $_POST[$prijmeni.$id],
+                                $_POST[$email.$id],
+                                $_POST[$telefon.$id]);
         }
-        if(isset($_POST["zrusUcet".$row["id_uzivatel"]])) {
-            $validation = User::deleteUser($row["id_uzivatel"]);
-            break;
+        else if(!empty(array_keys($_POST,"Zrušit účet"))) {
+            $id = explode('updtUcet',array_keys($_POST,"Zrušit účet")[0])[1];
+            $validation = User::deleteUser($id);
         }
     }
 ?>

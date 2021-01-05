@@ -1,8 +1,5 @@
 <section class="formWrapper">
 <?php
-
-    $data = Plane::getAll($_SESSION["uzivatel"]);
-
     $btn["Detail"]["detail"] = "Zobraz";
     $btn["Správa"]["zrusLet"] = "Zruš";
 
@@ -15,15 +12,15 @@
     $letiste = "letiste";
 
     if($_POST) {
-        foreach($data as $row) {
-            if (isset($_POST["detail" . $row["id_letadlo"]])) {
-                header("Location:  /index.php?page=detail&letadlo=".$row["imatrikulace"]);
-                exit();
-            }
-            else if (isset($_POST["zrusLet" . $row["id_letadlo"]])) {
-                $validation = Plane::delete($row["id_letadlo"]);
-                break;
-            }
+        if (!empty(array_keys($_POST,"Zobraz"))) {
+            $id = explode('detail',array_keys($_POST,"Zobraz")[0])[1];
+            $plane = Plane::getPlane($id);
+            header("Location:  /index.php?page=detail&letadlo=".$plane["imatrikulace"]);
+            exit();
+        }
+        else if (!empty(array_keys($_POST,"Zruš"))) {
+            $id = explode('zrusLet',array_keys($_POST,"Zruš")[0])[1];
+            $validation = Plane::delete($id);
         }
     }
 

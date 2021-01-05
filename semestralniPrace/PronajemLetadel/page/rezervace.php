@@ -1,62 +1,35 @@
 <?php
-    $data = Plane::getReservationPlaneNext($_GET["letadlo"]);
+    if($_POST) {
+        if(isset($_POST["operace"])) {
+            header("Location: /index.php?page=rezervace&rezervace[letadlo]=".$_GET["rezervace"]["letadlo"]."&rezervace[typ]=".$_POST["operace"]);
+        }
 
-    foreach ($data as $key => $value) {
-        $datumKey = str_replace(' ','_',$value["datum"]);
-        if(isset($_POST["rem".$datumKey])){
+        if(!empty(array_keys($_POST,"Odhlásit"))){
+            $datum = explode('rem',array_keys($_POST,"Odhlásit")[0])[1];
+            $datumKey = str_replace('_',' ',$datum);
             $conn = Connection::getPdoInstance();
-            $letadlo = Plane::getPlaneImatrikulace($_GET["letadlo"]);
+            $letadlo = Plane::getPlaneImatrikulace($_GET["rezervace"]["letadlo"]);
             $stmt = $conn->prepare("
     DELETE FROM rezervace
     WHERE datum = :datum AND letadlo_id_letadlo = :letadlo");
-            $stmt->bindParam(':datum', $value["datum"]);
+            $stmt->bindParam(':datum', $datumKey);
             $stmt->bindParam(':letadlo', $letadlo["id_letadlo"]);
             $stmt->execute();
-            break;
         }
     }
 ?>
 
 <script>
-    function getOperace(value) {
-        if(value === "nadchazejici") {
-            document.getElementById("rezervace").innerHTML = '\
-                <?php
-                $btn["Odhlášení"]["rem"] = "Odhlásit";
-                $dataTableShow = new DataTable(Plane::getReservationPlaneNext($_GET["letadlo"]));
-                $dataTableShow->addColumn("jmeno", "Jméno");
-                $dataTableShow->addColumn("prijmeni", "Prijmení");
-                $dataTableShow->addColumn("telefon", "Telefon");
-                $dataTableShow->addColumn("email", "Email");
-                $dataTableShow->addColumn("datum", "Kdy");
-                $dataTableShow->addColumn("pocet_hodin", "Doba (hod.)");
-                $dataTableShow->addColumn("cena", "Cena");
-                $dataTableShow->renderWithButtons("datum","/index.php?page=rezervace&letadlo=".$_GET["letadlo"],$btn);
-                echo '<div id="buttonWrapper"><button id="printButton" onclick="window.print();">Vytisknout</button></div>';
-                ?>';
-        } else if(value === "probehle"){
-            document.getElementById("rezervace").innerHTML = '\
-                <?php
-                $dataTableShow = new DataTable(Plane::getReservationPlaneHist($_GET["letadlo"]));
-                $dataTableShow->addColumn("jmeno", "Jméno");
-                $dataTableShow->addColumn("prijmeni", "Prijmení");
-                $dataTableShow->addColumn("telefon", "Telefon");
-                $dataTableShow->addColumn("email", "Email");
-                $dataTableShow->addColumn("datum", "Kdy");
-                $dataTableShow->addColumn("pocet_hodin", "Doba (hod.)");
-                $dataTableShow->addColumn("cena", "Cena");
-                $dataTableShow->render();
-                echo '<div id="buttonWrapper"><button id="printButton" onclick="window.print();">Vytisknout</button></div>';
-                ?>';
-        }
+    function getOperace() {
+        document.getElementById("hidden").click();
     }
 </script>
 
 <section class="formWrapper">
     <?php
-    if($_GET["letadlo"]) {
-        $letadlo = Plane::getPlaneImatrikulace($_GET["letadlo"]);
-        if($letadlo["majitel"]<>$_SESSION["uzivatel"]) {
+    if(isset($_GET["rezervace"]["letadlo"])) {
+        $letadlo = Plane::getPlaneImatrikulace($_GET["rezervace"]["letadlo"]);
+        if($letadlo["majitel"]!=$_SESSION["uzivatel"]) {
             header("Location:  /index.php?page=main");
             exit();
         }
@@ -66,32 +39,60 @@
         exit();
     }
 
-    echo '<div style="text-align: center;"><h1>REZERVACE PRO ['.$_GET["letadlo"].']</h1></div>';
+    echo '<div style="text-align: center;"><h1>REZERVACE PRO ['.$_GET["rezervace"]["letadlo"].']</h1></div>';
 ?>
 
     <div style="text-align: center; margin-bottom: 5px;">
-        <form name="form" method="post">
-            <select onchange="getOperace(this.value)" class="select">
+        <form name="rezervace" method="post">
+            <select onchange="getOperace()" class="select" name="operace">
                 <?php
                 $set = NULL;
                 echo '<option disabled ';
-                if(!isset($_POST["edit"]) && !isset($_POST["vloz"]))
+                if(!isset($_GET["rezervace"]["typ"]))
                     echo 'selected value';
                 echo '> -- REZERVACE -- </option>';
                 echo '<option value="nadchazejici" ';
+                if(isset($_GET["rezervace"]["typ"]) && $_GET["rezervace"]["typ"] == "nadchazejici")
+                    echo 'selected';
                 echo '>Nadcházející</option>';
                 echo '<option value="probehle"';
+                if(isset($_GET["rezervace"]["typ"]) && $_GET["rezervace"]["typ"] == "probehle")
+                    echo 'selected';
                 echo '>Proběhlé</option>';
                 ?>
             </select>
+            <button type="submit" name="hidden" id="hidden" hidden="hidden">
         </form>
     </div>
 
     <div id="rezervace">
+        <?php
+        if(isset($_GET["rezervace"]["typ"]) && $_GET["rezervace"]["typ"] == "nadchazejici") {
+            $btn["Odhlášení"]["rem"] = "Odhlásit";
+            $dataTableShow = new DataTable(Plane::getReservationPlaneNext($_GET["rezervace"]["letadlo"]));
+            $dataTableShow->addColumn("jmeno", "Jméno");
+            $dataTableShow->addColumn("prijmeni", "Prijmení");
+            $dataTableShow->addColumn("telefon", "Telefon");
+            $dataTableShow->addColumn("email", "Email");
+            $dataTableShow->addColumn("datum", "Kdy");
+            $dataTableShow->addColumn("pocet_hodin", "Doba (hod.)");
+            $dataTableShow->addColumn("cena", "Cena");
+            $dataTableShow->renderWithButtons("datum","/index.php?page=rezervace&rezervace[letadlo]=".$_GET["rezervace"]["letadlo"]."&rezervace[typ]=nadchazejici",$btn);
+        } else if(isset($_GET["rezervace"]["typ"]) && $_GET["rezervace"]["typ"] == "probehle") {
+            $dataTableShow = new DataTable(Plane::getReservationPlaneHist($_GET["rezervace"]["letadlo"]));
+            $dataTableShow->addColumn("jmeno", "Jméno");
+            $dataTableShow->addColumn("prijmeni", "Prijmení");
+            $dataTableShow->addColumn("telefon", "Telefon");
+            $dataTableShow->addColumn("email", "Email");
+            $dataTableShow->addColumn("datum", "Kdy");
+            $dataTableShow->addColumn("pocet_hodin", "Doba (hod.)");
+            $dataTableShow->addColumn("cena", "Cena");
+            $dataTableShow->render();
+        }
+
+        if(isset($_GET["rezervace"]["typ"])) {
+            echo '<div id="buttonWrapper"><button id="printButton" onclick="window.print();">Vytisknout</button></div>';
+        }
+        ?>
     </div>
 </section>
-
-<?php
-if($set != NULL)
-    echo '<script>window.getOperace("'.$set.'"); </script>';
-?>

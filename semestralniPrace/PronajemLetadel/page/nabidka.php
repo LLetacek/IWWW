@@ -27,32 +27,24 @@
     function getRefresh(selected) {
         document.cookie = "selected-kategory=" + selected + '; Path=/;';
         this.form.submit();
-        getOperace();
     }
 
-    function getOperace() {
-        document.getElementById("galerie").innerHTML = '\
-        <?php
-            if(isset($_COOKIE["selected-kategory"])) {
-                $data = Plane::getAllByKategory($_SESSION["uzivatel"], $_COOKIE["selected-kategory"]);
-                foreach ($data as $key => $value) {
-                    echo "<a href=\"/index.php?page=detail&letadlo=".$value["imatrikulace"]."\" class=\"detail\">";
-                    echo "    <img src=\"" . $value["obrazek"] . "\" alt=\"" . $value["imatrikulace"] . "\">";
-                    echo "    <div class=\"prejeti\">";
-                    echo "        <div class=\"text\">" . $value["nazev"] . "</div>";
-                    echo "    </div>";
-                    echo "</a>";
-                }
-            }
-            ?>';
-        }
 </script>
 
 <section>
     <div id="galerie" class="obrazekWrapper">
+        <?php
+        if(isset($_COOKIE["selected-kategory"])) {
+            $data = Plane::getAllByKategory($_SESSION["uzivatel"], $_COOKIE["selected-kategory"]);
+            foreach ($data as $key => $value) {
+                echo "<a href=\"/index.php?page=detail&letadlo=".$value["imatrikulace"]."\" class=\"detail\">";
+                echo "    <img src=\"" . $value["obrazek"] . "\" alt=\"" . $value["imatrikulace"] . "\">";
+                echo "    <div class=\"prejeti\">";
+                echo "        <div class=\"text\">" . $value["nazev"] . "</div>";
+                echo "    </div>";
+                echo "</a>";
+            }
+        }
+        ?>
     </div>
 </section>
-
-<?php
-    echo '<script>window.getOperace();</script>';
-?>
